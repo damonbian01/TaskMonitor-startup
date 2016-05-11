@@ -15,11 +15,6 @@
 			<bean class="com.cstnet.cnnic.inteceptors.LoggedInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-	<!-- register handler mapping -->
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="order" value="1"></property>
-	</bean>
 	
 	<bean id="urlMapping"
 		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
@@ -40,3 +35,17 @@
 	</bean>
 
 </beans>
+
+<!-- register handler mapping -->
+<!-- 
+ <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	<property name="interceptors">
+		<list>
+			<bean class="com.cstnet.cnnic.inteceptors.LoggedInterceptor"></bean>
+		</list>
+	</property>	 
+ </bean>
+<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	<property name="order" value="1"></property>
+</bean>
+ -->

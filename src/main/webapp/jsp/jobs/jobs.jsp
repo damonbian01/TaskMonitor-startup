@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>任务概览</title>
+<link rel="shortcut icon" href="themes/images/cstnet/favicon.ico" />
+<title>任务总览</title>
 </head>
 <body>
 
+这是任务总览界面
+
+提交任务
 
 
 </body>

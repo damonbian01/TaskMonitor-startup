@@ -6,12 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 import org.springframework.web.servlet.mvc.support.ControllerBeanNameHandlerMapping;
 
 import com.cstnet.cnnic.conf.SystemCons;
 import com.cstnet.cnnic.po.User;
+import com.cstnet.cnnic.service.UserService;
 
 /**
  * method 1: configure by annotation method 2: extends
@@ -21,6 +24,10 @@ import com.cstnet.cnnic.po.User;
  */
 public class UserController extends AbstractController {
 
+	@Autowired
+	@Qualifier("UserService")
+	private UserService userService;
+	
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -29,15 +36,13 @@ public class UserController extends AbstractController {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter writer = response.getWriter();
 		
-		String username = (String) request.getParameter("username");
+		String email = (String) request.getParameter("username");
 		String userpwd = (String) request.getParameter("userpwd");
-		System.out.println("username:"+username+" passwd:"+userpwd+" logged");
-		if (username != null && username.equals("admin") && userpwd != null && userpwd.equals("admin")) {
-			User admin = new User();
-			admin.setId(1);
-			admin.setName("admin");
-			admin.setPasswd("admin");
-			admin.setEmail("admin@cstnet.cn");
+		System.out.println("username:"+email+" passwd:"+userpwd+" logged");
+		
+		/*login*/
+		User admin = userService.login(email, userpwd);
+		if (admin != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute(SystemCons.admin, admin);
 			writer.print(1);

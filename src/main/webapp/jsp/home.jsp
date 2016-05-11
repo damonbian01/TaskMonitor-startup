@@ -13,6 +13,7 @@
   <tr>
     <td><a href="http://10.10.1.19:8088" target="_blank">RM monitor</a></td>
     <td><a href="http://10.10.1.19:50070" target="_blank">hdfs monitor</a></td>
+    <td><a href="<%=request.getContextPath() %>/Task/tasks" target="_blank">Task Management</a></td>
   </tr>
 </table>
 

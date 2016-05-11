@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -18,11 +19,13 @@ public class JDBCTestCase {
 	private ApplicationContext ctx = null;
 	JdbcTemplate jdbcTemplate = null;
 	DataSource dataSources = null;
+	SessionFactory sessionFactory = null;
 	
 	{
 		ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-		dataSources = ctx.getBean(DataSource.class);
-		jdbcTemplate = (JdbcTemplate) ctx.getBean("JdbcTemplate");
+		dataSources = (DataSource) ctx.getBean("dataSource");
+		sessionFactory = (SessionFactory) ctx.getBean("sessionFactory");
+//		jdbcTemplate = (JdbcTemplate) ctx.getBean("JdbcTemplate");
 	}
 	
 	@Test
@@ -33,6 +36,11 @@ public class JDBCTestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testSessionFactory() {
+		System.out.println(sessionFactory.toString());
 	}
 	
 	@Test
